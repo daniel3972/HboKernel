@@ -5,6 +5,8 @@ ARCH=$2
 SMP=$3
 PREEMPT=$4
 CC=$5
+hbover=$(cat ~/aS3/kernel_lollipop/version)
+hbodata=$(date '+%Y%m%d')
 
 vecho() { [ "${quiet}" = "silent_" ] || echo "$@" ; }
 
@@ -73,8 +75,8 @@ UTS_TRUNCATE="cut -b -$UTS_LEN"
 
   echo \#define UTS_VERSION \"`echo $UTS_VERSION | $UTS_TRUNCATE`\"
 
-  echo \#define LINUX_COMPILE_BY \"`echo $LINUX_COMPILE_BY | $UTS_TRUNCATE`\"
-  echo \#define LINUX_COMPILE_HOST \"`echo $LINUX_COMPILE_HOST | $UTS_TRUNCATE`\"
+  echo \#define LINUX_COMPILE_BY \"HboKernel-$hbover-$hbodata\"
+  echo \#define LINUX_COMPILE_HOST \"HboHD\"
 
   echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | tail -n 1`\"
 ) > .tmpcompile
