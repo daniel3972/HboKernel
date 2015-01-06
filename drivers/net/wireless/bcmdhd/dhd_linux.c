@@ -6845,29 +6845,11 @@ static void _dhd_release_wakelock_timer(unsigned long data)
 	dhd_info_t *dhd = (dhd_info_t *)data;
 	unsigned long flags;
 
-<<<<<<< HEAD
 	spin_lock_irqsave(&dhd->wakelock_spinlock, flags);
 
 	if (time_after(dhd_wl_timeout(dhd), jiffies)) {
 		mod_timer(&dhd->wl_timer, dhd_wl_timeout(dhd));
 		goto out;
-=======
-	if (dhd) {
-		spin_lock_irqsave(&dhd->wakelock_spinlock, flags);
-		ret = dhd->wakelock_rx_timeout_enable > dhd->wakelock_ctrl_timeout_enable ?
-			dhd->wakelock_rx_timeout_enable : dhd->wakelock_ctrl_timeout_enable;
-#ifdef CONFIG_HAS_WAKELOCK
-		if (dhd->wakelock_rx_timeout_enable)
-			wake_lock_timeout(&dhd->wl_rxwake,
-				msecs_to_jiffies(dhd->wakelock_rx_timeout_enable)/4);
-		if (dhd->wakelock_ctrl_timeout_enable)
-			wake_lock_timeout(&dhd->wl_ctrlwake,
-				msecs_to_jiffies(dhd->wakelock_ctrl_timeout_enable)/4);
-#endif
-		dhd->wakelock_rx_timeout_enable = 0;
-		dhd->wakelock_ctrl_timeout_enable = 0;
-		spin_unlock_irqrestore(&dhd->wakelock_spinlock, flags);
->>>>>>> df5f566... dhd_linux: reduce wifi wakelock times
 	}
 	if (dhd->wakelock_counter) {
 		goto out;
