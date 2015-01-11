@@ -365,10 +365,15 @@ LINUXINCLUDE    := -I$(srctree)/arch/$(hdr-arch)/include \
 KBUILD_CPPFLAGS := -D__KERNEL__
 
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
-		   -fno-strict-aliasing -fno-common \
-		   -Werror-implicit-function-declaration \
-		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks
+		   -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration \
+		   -Wno-format-security -fno-delete-null-pointer-checks \
+		   -marm -march=armv7-a -mcpu=cortex-a9 -mtune=cortex-a9 \
+		   -mfloat-abi=softfp -mfpu=neon -O3 --param l1-cache-line-size=32 \
+		   --param l1-cache-size=32 --param l2-cache-size=32 -DNDEBUG -fsection-anchors \
+		   -funsafe-loop-optimizations -fivopts -ftree-loop-im -ftree-loop-ivcanon -funswitch-loops \
+		   -frename-registers -fgcse-las -fgcse-sm -fweb -ftracer -fipa-pta -fmodulo-sched \
+		   -fmodulo-sched-allow-regmoves
+		   
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
