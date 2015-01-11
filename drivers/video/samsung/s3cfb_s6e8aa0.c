@@ -894,8 +894,8 @@ static int update_brightness(struct lcd_info *lcd, u8 force)
 
 	brightness = lcd->bd->props.brightness;
 
-	if (unlikely(!lcd->auto_brightness && brightness > 255))
-		brightness = 255;
+	if (unlikely(!lcd->auto_brightness && brightness > 250))
+		brightness = 250;
 
 	lcd->bl = get_backlight_level_from_brightness(brightness);
 
